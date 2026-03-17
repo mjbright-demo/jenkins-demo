@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: '<your repo url>'
+                git branch: 'main', url: 'https://github.com/mjbright-demo/jenkins-demo.git'
             }
         }
         stage('Install Terraform') {
