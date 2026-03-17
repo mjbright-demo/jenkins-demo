@@ -2,7 +2,8 @@ pipeline {
     agent any
     environment {
         BIN = "/var/jenkins_home/bin"
-        PATH = "/${BIN}:${env.PATH}"
+        // ?? PATH = "/${BIN}:${env.PATH}"
+        PATH = "/var/jenkins_home/bin:${env.PATH}"
         TERRAFORM_VERSION   = "1.14.7"
 
         /*
@@ -47,13 +48,14 @@ pipeline {
             }
         }
         */
-        stage('Azure Groups') {
+        stage('List Visible Azure Groups') {
             steps {
                 sh '''
                 echo "Showing visible Resource Groups"
                 az group list -o table
                 '''
             }
+        }
         stage('Terraform Init') {
             steps {
                 sh '''
