@@ -1,12 +1,12 @@
 pipeline {
     agent any
-    #environment {
-        #ARM_CLIENT_ID       = credentials('azure_sp_client_id')
-        #ARM_CLIENT_SECRET   = credentials('azure_sp_client_secret')
-        #ARM_SUBSCRIPTION_ID = credentials('azure_subscription_id')
-        #ARM_TENANT_ID       = credentials('azure_tenant_id')
-        #TERRAFORM_VERSION   = "1.5.6"
-    #}
+    /* environment {
+        ARM_CLIENT_ID       = credentials('azure_sp_client_id')
+        ARM_CLIENT_SECRET   = credentials('azure_sp_client_secret')
+        ARM_SUBSCRIPTION_ID = credentials('azure_subscription_id')
+        ARM_TENANT_ID       = credentials('azure_tenant_id')
+        TERRAFORM_VERSION   = "1.5.6"
+    } */
     stages {
         stage('Clone Repository') {
             steps {
