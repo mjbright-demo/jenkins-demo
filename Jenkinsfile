@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         BIN = "/var/jenkins_home/bin"
-        PATH = "/${env.BIN}:${env.PATH}"
+        PATH = "/${BIN}:${env.PATH}"
         TERRAFORM_VERSION   = "1.14.7"
 
         /*
@@ -25,7 +25,7 @@ pipeline {
                     echo "Terraform not found. Installing..."
                     curl -fsSL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip
                     unzip -o terraform.zip
-                    sudo mv terraform ${env.BIN}
+                    sudo mv terraform ${BIN}
                 else
                     echo "Terraform already installed."
                 fi
@@ -33,6 +33,7 @@ pipeline {
                 '''
             }
         }
+        /*
         stage('Azure Login') {
             steps {
                 sh '''
@@ -45,6 +46,14 @@ pipeline {
                 '''
             }
         }
+        */
+        stage('Azure Groups') {
+            steps {
+                sh '''
+                echo "Showing visible Resource Groups"
+                az group list -o table
+                '''
+            }
         stage('Terraform Init') {
             steps {
                 sh '''
