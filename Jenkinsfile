@@ -1,12 +1,17 @@
 pipeline {
     agent any
-    /* environment {
+    environment {
+        BIN = "/var/jenkins_home/bin"
+        PATH = "/${env.BIN}:${env.PATH}"
+        TERRAFORM_VERSION   = "1.14.7"
+
+        /*
         ARM_CLIENT_ID       = credentials('azure_sp_client_id')
         ARM_CLIENT_SECRET   = credentials('azure_sp_client_secret')
         ARM_SUBSCRIPTION_ID = credentials('azure_subscription_id')
         ARM_TENANT_ID       = credentials('azure_tenant_id')
-        TERRAFORM_VERSION   = "1.5.6"
-    } */
+        */
+    }
     stages {
         stage('Clone Repository') {
             steps {
@@ -20,7 +25,7 @@ pipeline {
                     echo "Terraform not found. Installing..."
                     curl -fsSL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip
                     unzip -o terraform.zip
-                    sudo mv terraform /usr/local/bin/
+                    sudo mv terraform ${env.BIN}
                 else
                     echo "Terraform already installed."
                 fi
